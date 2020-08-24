@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="Encoding">
+    <file url="file://$PROJECT_DIR$" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/web/assets/images/Bank_Pasargad_logo.png" charset="windows-1256" />
+    <file url="file://$PROJECT_DIR$/web/assets/images/boss.png" charset="windows-1256" />
+    <file url="file://$PROJECT_DIR$/web/assets/images/clear.png" charset="windows-1256" />
+    <file url="file://$PROJECT_DIR$/web/assets/images/eye.png" charset="windows-1256" />
+    <file url="file://$PROJECT_DIR$/web/assets/images/loan.png" charset="windows-1256" />
+    <file url="file://$PROJECT_DIR$/web/assets/images/magnifying-glass.png" charset="windows-1256" />
+    <file url="file://$PROJECT_DIR$/web/assets/images/man-user (1).png" charset="windows-1256" />
+    <file url="file://$PROJECT_DIR$/web/assets/images/plus.png" charset="windows-1256" />
+    <file url="file://$PROJECT_DIR$/web/assets/images/statement.png" charset="windows-1256" />
+  </component>
+</project>
