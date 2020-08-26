@@ -16,6 +16,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.LogManager;
 import java.util.logging.Logger;
@@ -38,11 +39,15 @@ public class AjaxServlet extends HttpServlet {
                 new AnnotationConfigApplicationContext(ProjectConfig.class);
         String requestId = request.getParameter("requestId");
         String status = request.getParameter("status");
+
+
         DayOffRequestService dors = context.getBean(DayOffRequestService.class);
         DayOffRequest dayOffRequest = dors.Get(Integer.parseInt(requestId));
         CategoryEntityService ces = context.getBean(CategoryEntityService.class);
-        CategoryEntity categoryEntity = ces.GetById(Integer.parseInt(status));
-        dayOffRequest.setStatus(categoryEntity);
+        List<CategoryEntity> categoryEntities=ces.GetByCode(status);
+
+
+        dayOffRequest.setStatus(categoryEntities.get(0));
         dors.Edit(dayOffRequest);
         JSONObject jsonObject = new JSONObject();
         jsonObject.put("result", "done");

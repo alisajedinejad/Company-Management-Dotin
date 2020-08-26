@@ -2,8 +2,10 @@ package service;
 
 import Exeption_Handler.ForbiddenDaysOff;
 import entity.DayOffRequest;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
+@Service
 
 public interface DayOffRequestService {
 

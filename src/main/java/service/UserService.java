@@ -2,8 +2,10 @@ package service;
 
 import entity.Email;
 import entity.User;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
+@Service
 
 public interface UserService {
 

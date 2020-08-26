@@ -7,10 +7,18 @@
 
     <img class="loginIMGAnimation" id="loginIMG" src="../assets/images/login.png">
 
-    <form id="loginTable" action="/ctl/login" method="post">
+    <form id="loginTable" action="/ctl/logToSystem" method="post">
 
 
-        <button class="hover" id="loginView" style="" type="submit">ورود به سیستم مدیریت همکاران</button>
+        <button class="hover loginView" style="" type="submit">ورود به سیستم مدیریت همکاران</button>
+
+    </form>
+
+
+    <form id="loginTable2" action="/ctl/createSample" method="post">
+
+
+        <button class="hover loginView"  style="" type="submit">ساخت تیبل های نمونه</button>
 
     </form>
 

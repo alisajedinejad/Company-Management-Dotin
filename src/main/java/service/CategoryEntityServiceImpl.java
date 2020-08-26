@@ -40,4 +40,9 @@ public class CategoryEntityServiceImpl implements CategoryEntityService {
     public CategoryEntity GetById(int id) {
         return CategoryEntitydao.SelectById(id);
     }
+
+    @Override
+    public List<CategoryEntity> GetByCode(String code) {
+        return CategoryEntitydao.SelectByCode(code);
+    }
 }

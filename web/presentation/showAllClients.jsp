@@ -4,6 +4,8 @@
 <%
 
     List<User> users2 = (List<User>) request.getAttribute("users2");
+    String userName = (String) request.getAttribute("userName");
+    String password = (String) request.getAttribute("password");
 
 %>
 <%@ include file="./header.jsp" %>
@@ -14,6 +16,15 @@
         <img id="profilePic2" src="../assets/images/more.png">
 
     </div>
+
+    <form action="/ctl/checkPassword">
+        <input name="userName" value="<% out.print(userName); %>" hidden>
+        <input name="password" value="<% out.print(password); %>" hidden>
+        <button class="defaultBTN" style="">بازگشت</button>
+
+    </form>
+
+
 
     <table id="showAllClientTable">
 

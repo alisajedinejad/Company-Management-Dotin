@@ -41,6 +41,7 @@ public class UserDaoImpl implements UserDao {
 
     @SuppressWarnings("unchecked")
     public List<User> SelectAll() {
+        System.out.println("heloooo");
         Query query = em.createQuery("from User", User.class);
         return (List<User>) query.getResultList();
     }

@@ -5,16 +5,20 @@ import javax.persistence.*;
 import java.util.List;
 
 @Entity
-public class User {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer id;
+public class User  extends ParentConfig{
+
     @OneToMany(fetch = FetchType.EAGER)
     private List<User> employies;
     @ManyToOne()
     private User manager;
     @OneToOne
     private CategoryEntity role;
+
+    public User() {
+        super.makeCreatedate();
+        super.setActive(true);
+        super.setVersion("1.0");
+    }
 
     public CategoryEntity getRole() {
         return role;
@@ -70,20 +74,6 @@ public class User {
         this.email = email;
     }
 
-    public Integer getId() {
-        return this.id;
-    }
 
-    public void setId(Integer id) {
-        this.id = id;
-    }
 
-    @Override
-    public String toString() {
-        return "User{" +
-                "id=" + id +
-                ", name='" + name + '\'' +
-                ", email='" + email + '\'' +
-                '}';
-    }
 }

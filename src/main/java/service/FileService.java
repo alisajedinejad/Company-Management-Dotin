@@ -1,8 +1,10 @@
 package service;
 
 import entity.File;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
+@Service
 
 public interface FileService {
 

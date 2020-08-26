@@ -4,6 +4,7 @@ import Exeption_Handler.CheckForbiddenVacationDate;
 import Exeption_Handler.CheckLimitsDaysOff;
 import Exeption_Handler.ForbiddenDaysOff;
 import dao.DayOffRequestDao;
+import dao.UserDao;
 import entity.DayOffRequest;
 import entity.User;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -48,13 +49,38 @@ public class DayOffRequestServiceImpl implements DayOffRequestService {
 
     @Override
     public List<DayOffRequest> GetAllByManagerId(int id) {
+
+        List<User> users=DayOffRequestdao.SelectAllUsers();
+
+        User userAdmin=new User();
+
+        for(User user:users){
+            if(user.getRole().getCode().equals("admin")) {
+
+                userAdmin=user;
+                break;
+            }
+
+        }
         List<DayOffRequest> dayOffRequests = DayOffRequestdao.SelectAll();
         List<DayOffRequest> dayOffRequestsProfed = new ArrayList<>();
         for (DayOffRequest dayOffRequest : dayOffRequests) {
             int userId = dayOffRequest.getUSerId();
             User user = DayOffRequestdao.SelectByIdUser(userId);
-            if (user.getManager().getId() == id && dayOffRequest.getStatus().getCode().equals("pending")) {
-                dayOffRequestsProfed.add(dayOffRequest);
+
+
+            if(user.getManager()!=null) {
+                System.out.println("here in if");
+                if (user.getManager().getId() == id && dayOffRequest.getStatus().getCode().equals("pending")) {
+                    dayOffRequestsProfed.add(dayOffRequest);
+                }
+            }
+            else{
+                System.out.println("here in else");
+
+                if (dayOffRequest.getStatus().getCode().equals("pending")  && userAdmin.getId()==id) {
+                    dayOffRequestsProfed.add(dayOffRequest);
+                }
             }
         }
         return dayOffRequestsProfed;

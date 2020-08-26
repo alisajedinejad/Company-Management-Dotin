@@ -102,5 +102,10 @@
             <artifactId>spring-webmvc</artifactId>
             <version>4.1.8.RELEASE</version>
         </dependency>
+        <dependency>
+            <groupId>com.ibm.icu</groupId>
+            <artifactId>icu4j</artifactId>
+            <version>67.1</version>
+        </dependency>
     </dependencies>
 </project>

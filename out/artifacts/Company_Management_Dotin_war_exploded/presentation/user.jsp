@@ -14,9 +14,12 @@
 
     List<CategoryEntity> CategoryEntities = (List<CategoryEntity>) request.getAttribute("CategoryEntities");
     List<User> users = (List<User>) request.getAttribute("users");
+
     List<DayOffRequest> requests = (List<DayOffRequest>) request.getAttribute("requests");
     User user = (User) request.getAttribute("user");
+    String msg = (String) request.getAttribute("msg");
     String myHash = Integer.toString(n) + "userId" + user.getId();
+//    String msg="sad";
 
 %>
 <div id="report">
@@ -36,7 +39,7 @@
         <img src="../assets/images/question.png">
 
         <p></p>
-        <button onclick="closeCorfirm('1')">بله</button>
+        <button onclick="closeCorfirm('1')">بله </button>
         <button onclick="closeCorfirm('0')"> خیر</button>
     </div>
 </div>
@@ -144,10 +147,13 @@
 
             </div>
 
+
+
+
+
             <div class="hover">
                 <button class="hover">ثبت</button>
             </div>
-
             <input name="userName" value="<% out.print(user.getEmail()); %>" hidden>
             <input name="password2" value="<% out.print(user.getPassword()); %>" hidden>
 
@@ -155,9 +161,12 @@
         </form>
 
         <div id="showAllClient">
-            <a href="/ctl/seeAll">
+
+            <form style="position: absolute;left: 0;top: 0" method="post" action="/ctl/seeAll">
                 <button class="hover">مشاهده همه ی همکاران</button>
-            </a>
+                <input name="userName" value="<% out.print(user.getEmail()); %>" hidden>
+                <input name="password2" value="<% out.print(user.getPassword()); %>" hidden>
+            </form>
         </div>
 
     </div>
@@ -176,12 +185,25 @@
                             <span style="border: none;background-color:transparent;width: 300px;height: 50px;z-index: 9"
                                   class="input-group-text cursor-pointer hover" id="dt_class"></span>
                         </div>
-                        <input name="startVacationTime" type="text" id="inputDate3" class="form-control" value="">
+                        <input type="text"  class="form-control" value="">
+                        <input name="startVacationTime" type="text" id="inputDate3" class="form-control" value="" hidden>
                         <img src="../assets/images/calendar.png"
                              style="width: 26px;height: 26px;top:5px;left: 5px;position: absolute">
                     </div>
                     <label id="showDate_class"
-                           style="width:300px;margin-left:0px;color: white;position: absolute;top: 60px;text-align: center;font-size: 17px"> </label>
+                           style="display: none; width:300px;margin-left:0px;color: white;position: absolute;top: 7px;text-align: center;font-size: 17px"> </label>
+
+
+
+
+                    <p id="showDate_class2"
+                           style="width:300px;margin-left:0px;color: white;position: absolute;top: 7px;text-align: center;font-size: 17px">
+                    برای انتخاب کلیک کنید
+
+                    </p>
+
+
+
                 </div>
             </div>
 
@@ -192,12 +214,21 @@
                             <span style="border: none;background-color:transparent;width: 300px;height: 50px;z-index: 9"
                                   class="input-group-text cursor-pointer hover" id="dt_class4"></span>
                         </div>
-                        <input name="endVacationTime" type="text" id="inputDate4" class="form-control" value="">
+                        <input  type="text" class="form-control" value>
+                        <input name="endVacationTime" type="text" id="inputDate4" class="form-control" value="" hidden>
                         <img src="../assets/images/calendar.png"
                              style="width: 26px;height: 26px;top: 5px;left:5px;position: absolute">
                     </div>
                     <label id="showDate_class4"
-                           style="width:300px;margin-left:0px;color: white;position: absolute;top: 60px;text-align: center;font-size: 17px"> </label>
+
+                           style="display:none;width:300px;margin-left:0px;color: white;position: absolute;top: 7px;text-align: center;font-size: 17px"> </label>
+
+                    <p id="showDate_class5"
+                       style="width:300px;margin-left:0px;color: white;position: absolute;top: 7px;text-align: center;font-size: 17px">
+                        برای انتخاب کلیک کنید
+
+                    </p>
+
                 </div>
             </div>
             <input name="userId" value="<% out.print(user.getId()); %>" hidden>
@@ -211,6 +242,8 @@
 
         <form style="height: 0px" action="/ctl/showAllVacations" method="post">
             <input name="userId" value="<% out.print(user.getId()); %>" hidden>
+            <input name="userName" value="<% out.print(user.getEmail()); %>" hidden>
+            <input name="password" value="<% out.print(user.getPassword()); %>" hidden>
             <button style="margin-left: -125px" type="submit" id="oldVacation">مشاهده درخواست های مرخصی قبلی</button>
         </form>
 
@@ -230,7 +263,7 @@
                     <% for (int i = 0; i < requests.size(); i++) {
                         String name = "";
                         for (int j = 0; j < users.size(); j++) {
-                            if (requests.get(0).getId() == users.get(j).getId()) {
+                            if (requests.get(i).getUSerId() == users.get(j).getId()) {
 
                                 name = users.get(j).getName();
                                 break;
@@ -254,13 +287,13 @@
                             <span class="" id="deny">رد درخواست</span>
 
 
-                            <div onclick="activeAccept('7',this,'<% out.print(i);%>','<% out.print(requests.get(i).getId());%>')"
+                            <div onclick="activeAccept('accepted',this,'<% out.print(i);%>','<% out.print(requests.get(i).getId());%>')"
                                  class="acceptD"
                                  id="acceptD<% out.print(i);%>"></div>
-                            <div onclick="activeAccept('5',this,'<% out.print(i);%>','<% out.print(requests.get(i).getId());%>')"
+                            <div onclick="activeAccept('pending',this,'<% out.print(i);%>','<% out.print(requests.get(i).getId());%>')"
                                  class="pendingD  activeAccept"
                                  id="pendingD<% out.print(i);%>"></div>
-                            <div onclick="activeAccept('6',this,'<% out.print(i);%>','<% out.print(requests.get(i).getId());%>')"
+                            <div onclick="activeAccept('rejected',this,'<% out.print(i);%>','<% out.print(requests.get(i).getId());%>')"
                                  class="denyD"
                                  id="denyD<% out.print(i);%>"></div>
 
@@ -374,9 +407,37 @@
 <script>
     $(document).ready(function () {
 
+        $("#startTimeVacation").on("click",function(){
+
+            $("#showDate_class2").css("display","none");
+            $("#showDate_class").css("display","block");
+
+
+        })
+
+        $("#endTimeVacation").on("click",function(){
+
+            $("#showDate_class5").css("display","none");
+            $("#showDate_class4").css("display","block");
+
+
+        })
+        <%
+
+           if(!msg.equals("0")){
+           %>
+
+           alert("<% out.print(msg); %>","success");
+
+
+
+           <% } %>
+
         var today = new Date();
         $("#inputDate3").val(today);
         $("#inputDate4").val(today);
+//        $("#showDate_class").text(today);
+//        $("#showDate_class4").text(today);
 
         $("#dt_class").MdPersianDateTimePicker({
             targetDateSelector: "#inputDate3",

@@ -28,5 +28,5 @@
 
 <body>
 <%--<%@ page contentType="text/html;charset=UTF-8" pageEncoding="UTF-8" %>--%>
-<a href="/ctl/login"><img style="position: absolute;z-index: 10;top: 25px;right: 50px"
+<a href="/ctl/logToSystem"><img style="position: absolute;z-index: 10;top: 25px;right: 50px"
                           src="../assets/images/logout.png"></a>

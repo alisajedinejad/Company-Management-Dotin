@@ -1,8 +1,10 @@
 package dao;
 
 import entity.File;
+import org.springframework.stereotype.Repository;
 
 import java.util.List;
+@Repository
 
 public interface FileDao {
     public File Insert(File t);

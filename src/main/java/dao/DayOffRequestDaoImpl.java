@@ -38,6 +38,12 @@ public class DayOffRequestDaoImpl implements DayOffRequestDao {
         return em.find(User.class, id);
     }
 
+    @Override
+    public List<User> SelectAllUsers() {
+        Query query = em.createQuery("from User ", User.class);
+        return (List<User>) query.getResultList();
+    }
+
     @SuppressWarnings("unchecked")
     public List<DayOffRequest> SelectAll() {
         Query query = em.createQuery("from DayOffRequest ", DayOffRequest.class);

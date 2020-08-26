@@ -7,10 +7,7 @@ import java.util.List;
 
 
 @Entity
-public class Email {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer id;
+public class Email extends ParentConfig {
     @ManyToMany(fetch = FetchType.EAGER)
     private List<User> recivers;
     @OneToMany(fetch = FetchType.EAGER, mappedBy = "email")
@@ -20,22 +17,18 @@ public class Email {
     private int sender;
     private String context;
 
+    public Email() {
+        super.makeCreatedate();
+        super.setActive(true);
+        super.setVersion("1.0");
+    }
+
     public List<User> getRecivers() {
         return recivers;
     }
 
     public void setRecivers(List<User> recivers) {
         this.recivers = recivers;
-    }
-
-    private Date creationTIme;
-
-    public Integer getId() {
-        return id;
-    }
-
-    public void setId(Integer id) {
-        this.id = id;
     }
 
     public int getSender() {
@@ -70,11 +63,4 @@ public class Email {
         this.importance = importance;
     }
 
-    public Date getCreationTIme() {
-        return creationTIme;
-    }
-
-    public void setCreationTIme(Date creationTIme) {
-        this.creationTIme = creationTIme;
-    }
 }

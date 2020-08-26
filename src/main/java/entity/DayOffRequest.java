@@ -5,11 +5,8 @@ import javax.persistence.*;
 import java.util.Date;
 
 @Entity
-public class DayOffRequest {
+public class DayOffRequest  extends ParentConfig{
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer id;
     @OneToOne()
     private CategoryEntity status;
     private int USerId;
@@ -17,6 +14,12 @@ public class DayOffRequest {
     private Date start;
     @Temporal(TemporalType.DATE)
     private Date end;
+
+    public DayOffRequest() {
+        super.makeCreatedate();
+        super.setActive(true);
+        super.setVersion("1.0");
+    }
 
     public Date getEnd() {
         return end;
@@ -50,22 +53,10 @@ public class DayOffRequest {
         this.USerId = USerId;
     }
 
-    public Integer getId() {
-        return id;
-    }
 
     public void setId(Integer id) {
         this.id = id;
     }
 
-    @Override
-    public String toString() {
-        return "DayOffRequest{" +
-                "id=" + id +
-                ", status=" + status +
-                ", USerId=" + USerId +
-                ", start=" + start +
-                ", end=" + end +
-                '}';
-    }
+
 }

@@ -35,7 +35,7 @@
         <tr>
             <td><% out.print(senders.get(i).getEmail()); %></td>
             <td><% out.print(userName); %></td>
-            <td><% out.print(emails.get(i).getCreationTIme()); %></td>
+            <td><% out.print(emails.get(i).getCreatedate()); %></td>
             <td><% out.print(emails.get(i).getContext()); %></td>
             <td><% out.print(emails.get(i).getImportance().getName()); %></td>
 

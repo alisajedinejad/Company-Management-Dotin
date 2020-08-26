@@ -1,6 +1,7 @@
 package dao;
 
 import entity.CategoryEntity;
+import entity.DayOffRequest;
 import org.springframework.stereotype.Repository;
 
 import javax.persistence.EntityManager;
@@ -31,6 +32,12 @@ public class CategoryEntityDaoImpl implements CategoryEntityDao {
 
     public CategoryEntity SelectById(int id) {
         return em.find(CategoryEntity.class, id);
+    }
+
+    @Override
+    public List<CategoryEntity> SelectByCode(String code) {
+        Query query = em.createQuery("from CategoryEntity where Code='" + code + "'", CategoryEntity.class);
+        return (List<CategoryEntity>) query.getResultList();
     }
 
     @SuppressWarnings("unchecked")

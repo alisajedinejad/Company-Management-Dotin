@@ -1,8 +1,10 @@
 package dao;
 
 import entity.Email;
+import org.springframework.stereotype.Repository;
 
 import java.util.List;
+@Repository
 
 public interface EmailDao {
     public Email Insert(Email t);

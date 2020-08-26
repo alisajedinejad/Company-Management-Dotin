@@ -4,22 +4,18 @@ package entity;
 import javax.persistence.*;
 
 @Entity
-public class File {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer id;
+public class File  extends ParentConfig{
+
 
     @ManyToOne
     private Email email;
     private String location;
     private String size;
 
-    public Integer getId() {
-        return id;
-    }
-
-    public void setId(Integer id) {
-        this.id = id;
+    public File() {
+        super.makeCreatedate();
+        super.setActive(true);
+        super.setVersion("1.0");
     }
 
     public Email getEmail() {
