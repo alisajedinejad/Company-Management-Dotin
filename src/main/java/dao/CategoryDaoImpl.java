@@ -42,7 +42,7 @@ public class CategoryDaoImpl implements CategoryDao {
     @Override
     public List<Category> SelectAllByCode(String s) {
 
-        Query query = em.createQuery("from Category where Code='" + s + "'", Category.class);
+        Query query = em.createQuery("from Category where c_code='" + s + "'", Category.class);
 
         return (List<Category>) query.getResultList();
     }

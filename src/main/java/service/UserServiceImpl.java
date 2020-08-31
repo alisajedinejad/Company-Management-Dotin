@@ -52,8 +52,8 @@ public class UserServiceImpl implements UserService {
     public List<User> getUserByEmail(List<Email> emails) {
         List<User> users = new ArrayList<>();
         for (Email email : emails) {
-            int id = email.getSender();
-            users.add(userdao.SelectById(id));
+            User user = email.getSender();
+            users.add(user);
         }
         return users;
     }

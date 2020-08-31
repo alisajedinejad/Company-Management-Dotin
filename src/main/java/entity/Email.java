@@ -7,14 +7,31 @@ import java.util.List;
 
 
 @Entity
+@Table(name = "t_email")
+@AttributeOverrides({
+        @AttributeOverride(name = "id", column = @Column(name = "c_emailId") ),
+        @AttributeOverride(name = "active", column = @Column(name = "c_active") ),
+        @AttributeOverride(name = "createdate", column = @Column(name = "c_createdate") ),
+        @AttributeOverride(name = "modificationdate", column = @Column(name = "c_modificationdate") ),
+        @AttributeOverride(name = "version", column = @Column(name = "c_version") ),
+        @AttributeOverride(name = "modificationdate", column = @Column(name = "c_modificationdate") ),
+})
 public class Email extends ParentConfig {
     @ManyToMany(fetch = FetchType.EAGER)
     private List<User> recivers;
-    @OneToMany(fetch = FetchType.EAGER, mappedBy = "email")
+    @OneToMany(fetch = FetchType.EAGER,mappedBy = "email")
+
     private List<File> attachments;
     @OneToOne
     private CategoryEntity importance;
-    private int sender;
+
+    @OneToOne
+    private User sender;
+
+
+
+    @Column(name = "c_context")
+
     private String context;
 
     public Email() {
@@ -31,11 +48,11 @@ public class Email extends ParentConfig {
         this.recivers = recivers;
     }
 
-    public int getSender() {
+    public User getSender() {
         return sender;
     }
 
-    public void setSender(int sender) {
+    public void setSender(User sender) {
         this.sender = sender;
     }
 

@@ -59,7 +59,7 @@ public class EmailController {
             SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
             Date date = new Date(System.currentTimeMillis());
             Email email = new Email();
-            email.setSender(user.getId());
+            email.setSender(user);
             email.setRecivers(users);
             email.setContext(context);
             email.setImportance(categoryEntity);
@@ -87,6 +87,7 @@ public class EmailController {
             DayOffRequestService dors = ac.getBean(DayOffRequestService.class);
             List<DayOffRequest> dayOffRequests = dors.GetAllByManagerId(users2.get(0).getId());
             Category category = cs2.GetAllByCode("role").get(0);
+            userService = ac.getBean(UserService.class);
             userService = ac.getBean(UserService.class);
             List<User> AllUsers = userService.GetAll();
             modelAndView.addObject("CategoryEntities", category.getCategoryEntities());

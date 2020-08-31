@@ -47,8 +47,22 @@
             <td><% out.print(emails.get(i).getContext()); %></td>
             <td><% out.print(emails.get(i).getImportance().getName()); %></td>
 
-            <td><a href="<% out.print(emails.get(i).getAttachments().get(0).getLocation()); %>"><%
-                out.print(emails.get(i).getAttachments().get(0).getLocation()); %></a></td>
+
+
+            <td>
+                <%  if(!emails.get(i).getAttachments().get(0).getLocation().equals("بدونه ضمیمه")){   %>
+                <a href="<% out.print(emails.get(i).getAttachments().get(0).getLocation()); %>"><%
+                out.print(emails.get(i).getAttachments().get(0).getLocation()); %></a>
+
+                <% }else{%>
+
+                <p>
+                    <% out.print(emails.get(i).getAttachments().get(0).getLocation()); %></p>
+
+                <% }%>
+
+
+            </td>
 
 
         </tr>

@@ -16,7 +16,9 @@ import service.*;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.sql.Date;
+import java.text.DateFormat;
 import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.List;
 
 /**
@@ -94,8 +96,9 @@ public class CheckOffDaysController {
 
         CategoryEntity categoryEntity = categoryEntityService.GetById(categoryEntities.get(0).getId());
         DayOffRequest dayOffRequest = new DayOffRequest();
-        dayOffRequest.setEnd(dateEndPersian);
-        dayOffRequest.setStart(dateStartPersian);
+        DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+        dayOffRequest.setEnd(dateFormat.format(dateEndPersian));
+        dayOffRequest.setStart(dateFormat.format(dateStartPersian));
         dayOffRequest.setUSerId(Integer.parseInt(userId));
         dayOffRequest.setStatus(categoryEntity);
         DayOffRequestService dayOffRequestService = context.getBean(DayOffRequestService.class);

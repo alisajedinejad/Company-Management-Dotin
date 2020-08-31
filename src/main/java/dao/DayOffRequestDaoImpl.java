@@ -52,7 +52,7 @@ public class DayOffRequestDaoImpl implements DayOffRequestDao {
 
     @Override
     public List<DayOffRequest> SelectAllByID(int id) {
-        Query query = em.createQuery("from DayOffRequest where USerId='" + id + "'", DayOffRequest.class);
+        Query query = em.createQuery("from DayOffRequest where c_USerId='" + id + "'", DayOffRequest.class);
         return (List<DayOffRequest>) query.getResultList();
     }
 }

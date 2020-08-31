@@ -36,7 +36,7 @@ public class CategoryEntityDaoImpl implements CategoryEntityDao {
 
     @Override
     public List<CategoryEntity> SelectByCode(String code) {
-        Query query = em.createQuery("from CategoryEntity where Code='" + code + "'", CategoryEntity.class);
+        Query query = em.createQuery("from CategoryEntity where c_code='" + code + "'", CategoryEntity.class);
         return (List<CategoryEntity>) query.getResultList();
     }
 

@@ -35,7 +35,7 @@ public class UserDaoImpl implements UserDao {
 
     @Override
     public List<User> SelectByEmail(String Email) {
-        Query query = em.createQuery("from User where email='" + Email + "'", User.class);
+        Query query = em.createQuery("from User where c_email='" + Email + "'", User.class);
         return (List<User>) query.getResultList();
     }
 

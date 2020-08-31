@@ -5,15 +5,27 @@ import javax.persistence.*;
 import java.util.Date;
 
 @Entity
+@Table(name = "t_dayOffRequest")
+@AttributeOverrides({
+        @AttributeOverride(name = "id", column = @Column(name = "c_dayOffRequestId") ),
+        @AttributeOverride(name = "active", column = @Column(name = "c_active") ),
+        @AttributeOverride(name = "createdate", column = @Column(name = "c_createdate") ),
+        @AttributeOverride(name = "modificationdate", column = @Column(name = "c_modificationdate") ),
+        @AttributeOverride(name = "version", column = @Column(name = "c_version") ),
+        @AttributeOverride(name = "modificationdate", column = @Column(name = "c_modificationdate") ),
+})
 public class DayOffRequest  extends ParentConfig{
 
-    @OneToOne()
+    @ManyToOne()
     private CategoryEntity status;
+
+    @Column(name = "c_USerId")
     private int USerId;
-    @Temporal(TemporalType.DATE)
-    private Date start;
-    @Temporal(TemporalType.DATE)
-    private Date end;
+    @Column(name = "c_start")
+
+    private String start;
+    @Column(name = "c_end")
+    private String end;
 
     public DayOffRequest() {
         super.makeCreatedate();
@@ -21,20 +33,20 @@ public class DayOffRequest  extends ParentConfig{
         super.setVersion("1.0");
     }
 
-    public Date getEnd() {
-        return end;
-    }
-
-    public void setEnd(Date end) {
-        this.end = end;
-    }
-
-    public Date getStart() {
+    public String getStart() {
         return start;
     }
 
-    public void setStart(Date start) {
+    public void setStart(String start) {
         this.start = start;
+    }
+
+    public String getEnd() {
+        return end;
+    }
+
+    public void setEnd(String end) {
+        this.end = end;
     }
 
     public CategoryEntity getStatus() {

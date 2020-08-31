@@ -37,52 +37,90 @@ public class UserController {
         modelAndView.setViewName("user");
         ApplicationContext context =
                 new AnnotationConfigApplicationContext(ProjectConfig.class);
+
+
+
+
         String name = request.getParameter("name");
         String email = request.getParameter("email");
         String role = request.getParameter("role");
         String manager = request.getParameter("manager");
         String password = request.getParameter("password");
         UserService us = context.getBean(UserService.class);
-        CategoryEntityService cs = context.getBean(CategoryEntityService.class);
-        CategoryEntity categoryEntity = cs.GetById(Integer.parseInt(role));
-        User userManager = us.GetById(Integer.parseInt(manager));
-        User user = new User();
-        user.setName(name);
-        user.setEmail(email);
-        user.setRole(categoryEntity);
-        user.setManager(userManager);
-        user.setPassword(password);
-        us.Add(user);
 
-        List<User> users = us.GetByEmail(request.getParameter("userName"));
 
-        if (users.size() != 0) {
-            if (users.get(0).getPassword().equals(request.getParameter("password2"))) {
-                modelAndView.setViewName("user");
-                CategoryService cs2 = context.getBean(CategoryService.class);
-                DayOffRequestService dors = context.getBean(DayOffRequestService.class);
-                List<DayOffRequest> dayOffRequests = dors.GetAllByManagerId(users.get(0).getId());
-                Category category = cs2.GetAllByCode("role").get(0);
-                us = context.getBean(UserService.class);
-                List<User> AllUsers = us.GetAll();
-                modelAndView.addObject("CategoryEntities", category.getCategoryEntities());
-                modelAndView.addObject("requests", dayOffRequests);
-                modelAndView.addObject("users", AllUsers);
-                modelAndView.addObject("msg", "0");
-                modelAndView.addObject("user", users.get(0));
-                modelAndView.addObject("msg","همکار با موفقیت ثبت شد");
-                return modelAndView;
+
+        if(!name.equals("") && !email.equals("") && !role.equals("نقش کاربر را مشخص کنید") && !manager.equals("") && !password.equals("لطفا مدیر مستقیم این همکار را مشخص کنید")) {
+            CategoryEntityService cs = context.getBean(CategoryEntityService.class);
+            CategoryEntity categoryEntity = cs.GetById(Integer.parseInt(role));
+            User userManager = us.GetById(Integer.parseInt(manager));
+            User user = new User();
+            user.setName(name);
+            user.setEmail(email);
+            user.setRole(categoryEntity);
+            user.setManager(userManager);
+            user.setPassword(password);
+            us.Add(user);
+
+            List<User> users = us.GetByEmail(request.getParameter("userName"));
+
+            if (users.size() != 0) {
+                if (users.get(0).getPassword().equals(request.getParameter("password2"))) {
+                    modelAndView.setViewName("user");
+                    CategoryService cs2 = context.getBean(CategoryService.class);
+                    DayOffRequestService dors = context.getBean(DayOffRequestService.class);
+                    List<DayOffRequest> dayOffRequests = dors.GetAllByManagerId(users.get(0).getId());
+                    Category category = cs2.GetAllByCode("role").get(0);
+                    us = context.getBean(UserService.class);
+                    List<User> AllUsers = us.GetAll();
+                    modelAndView.addObject("CategoryEntities", category.getCategoryEntities());
+                    modelAndView.addObject("requests", dayOffRequests);
+                    modelAndView.addObject("users", AllUsers);
+                    modelAndView.addObject("msg", "0");
+                    modelAndView.addObject("user", users.get(0));
+                    modelAndView.addObject("msg", "همکار با موفقیت ثبت شد");
+                    return modelAndView;
+                } else {
+                    modelAndView.setViewName("error");
+                    modelAndView.addObject("res", "");
+                    return modelAndView;
+                }
             } else {
                 modelAndView.setViewName("error");
                 modelAndView.addObject("res", "");
                 return modelAndView;
             }
-        } else {
-            modelAndView.setViewName("error");
-            modelAndView.addObject("res", "");
-            return modelAndView;
         }
+        else {
+            List<User> users = us.GetByEmail(request.getParameter("userName"));
 
+            if (users.size() != 0) {
+                if (users.get(0).getPassword().equals(request.getParameter("password2"))) {
+                    modelAndView.setViewName("user");
+                    CategoryService cs2 = context.getBean(CategoryService.class);
+                    DayOffRequestService dors = context.getBean(DayOffRequestService.class);
+                    List<DayOffRequest> dayOffRequests = dors.GetAllByManagerId(users.get(0).getId());
+                    Category category = cs2.GetAllByCode("role").get(0);
+                    us = context.getBean(UserService.class);
+                    List<User> AllUsers = us.GetAll();
+                    modelAndView.addObject("CategoryEntities", category.getCategoryEntities());
+                    modelAndView.addObject("requests", dayOffRequests);
+                    modelAndView.addObject("users", AllUsers);
+                    modelAndView.addObject("msg", "0");
+                    modelAndView.addObject("user", users.get(0));
+                    modelAndView.addObject("msg", "لطفا همه ی فیلد ها را پر کنید");
+                    return modelAndView;
+                } else {
+                    modelAndView.setViewName("error");
+                    modelAndView.addObject("res", "");
+                    return modelAndView;
+                }
+            } else {
+                modelAndView.setViewName("error");
+                modelAndView.addObject("res", "");
+                return modelAndView;
+            }
+        }
 
 
     }

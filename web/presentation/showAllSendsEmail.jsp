@@ -44,7 +44,7 @@
 
         %>
 
-        %>
+
         <tr>
             <td><% out.print(userName); %></td>
             <td><% out.print(email.getRecivers().get(i).getName()); %></td>
@@ -53,10 +53,20 @@
             <td><% out.print(email.getImportance().getName()); %></td>
 
             <%if (email.getAttachments().size() != 0) { %>
-            <td><a href="<% out.print(email.getAttachments().get(0).getLocation()); %>">
-                <% out.print(email.getAttachments().get(0).getLocation()); %></a></td>
+            <td>
+                <%  if(!email.getAttachments().get(0).getLocation().equals("بدونه ضمیمه")){   %>
+                <a href="<% out.print(email.getAttachments().get(0).getLocation()); %>">
+                <% out.print(email.getAttachments().get(0).getLocation()); %></a>
+            <% }else{%>
+
+                <p>
+                    <% out.print(email.getAttachments().get(0).getLocation()); %></p>
+
+                <% }%>
+
+            </td>
             <% } else { %>
-            <td><a href="">
+            <td><a href="#" onclick="alert('ضمیمه ای یافت نشد','fail')">
                 بدون ضمیمه
             </a></td>
             <% } %>
