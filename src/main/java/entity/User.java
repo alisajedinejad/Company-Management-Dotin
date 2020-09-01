@@ -16,37 +16,19 @@ import java.util.List;
 })
 public class User  extends ParentConfig{
 
-    @OneToMany(fetch = FetchType.EAGER)
-    @JoinTable(
-            name="t_employies_user",
-            joinColumns = @JoinColumn( name="c_userId"),
-            inverseJoinColumns = @JoinColumn( name="c_emailId")
-    )
+    @OneToMany(fetch = FetchType.EAGER,mappedBy = "employies")
     private List<User> employies;
-    @ManyToOne()
 
+    @ManyToOne()
     private User manager;
+
     @ManyToOne
     private CategoryEntity role;
 
-    public User() {
-        super.makeCreatedate();
-        super.setActive(true);
-        super.setVersion("1.0");
-    }
-
-    public CategoryEntity getRole() {
-        return role;
-    }
-
-    public void setRole(CategoryEntity role) {
-        this.role = role;
-    }
     @Column(name = "c_name")
-
     private String name;
-    @Column(name = "c_email")
 
+    @Column(name = "c_email")
     private String email;
 
     public String getPassword() {
@@ -91,6 +73,18 @@ public class User  extends ParentConfig{
         this.email = email;
     }
 
+    public User() {
+        super.makeCreatedate();
+        super.setActive(true);
+        super.setVersion("1.0");
+    }
 
+    public CategoryEntity getRole() {
+        return role;
+    }
+
+    public void setRole(CategoryEntity role) {
+        this.role = role;
+    }
 
 }

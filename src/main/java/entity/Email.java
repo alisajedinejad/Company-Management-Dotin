@@ -17,21 +17,21 @@ import java.util.List;
         @AttributeOverride(name = "modificationdate", column = @Column(name = "c_modificationdate") ),
 })
 public class Email extends ParentConfig {
+
     @ManyToMany(fetch = FetchType.EAGER)
     private List<User> recivers;
+
     @OneToMany(fetch = FetchType.EAGER,mappedBy = "email")
 
     private List<File> attachments;
+
     @OneToOne
     private CategoryEntity importance;
 
-    @OneToOne
+    @ManyToOne
     private User sender;
 
-
-
     @Column(name = "c_context")
-
     private String context;
 
     public Email() {

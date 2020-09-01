@@ -7,23 +7,24 @@ import java.util.Date;
 @Entity
 @Table(name = "t_dayOffRequest")
 @AttributeOverrides({
-        @AttributeOverride(name = "id", column = @Column(name = "c_dayOffRequestId") ),
-        @AttributeOverride(name = "active", column = @Column(name = "c_active") ),
-        @AttributeOverride(name = "createdate", column = @Column(name = "c_createdate") ),
-        @AttributeOverride(name = "modificationdate", column = @Column(name = "c_modificationdate") ),
-        @AttributeOverride(name = "version", column = @Column(name = "c_version") ),
-        @AttributeOverride(name = "modificationdate", column = @Column(name = "c_modificationdate") ),
+        @AttributeOverride(name = "id", column = @Column(name = "c_dayOffRequestId")),
+        @AttributeOverride(name = "active", column = @Column(name = "c_active")),
+        @AttributeOverride(name = "createdate", column = @Column(name = "c_createdate")),
+        @AttributeOverride(name = "modificationdate", column = @Column(name = "c_modificationdate")),
+        @AttributeOverride(name = "version", column = @Column(name = "c_version")),
+        @AttributeOverride(name = "modificationdate", column = @Column(name = "c_modificationdate")),
 })
-public class DayOffRequest  extends ParentConfig{
+public class DayOffRequest extends ParentConfig {
 
     @ManyToOne()
     private CategoryEntity status;
 
-    @Column(name = "c_USerId")
-    private int USerId;
-    @Column(name = "c_start")
+    @ManyToOne
+    private User USerId;
 
+    @Column(name = "c_start")
     private String start;
+
     @Column(name = "c_end")
     private String end;
 
@@ -57,14 +58,13 @@ public class DayOffRequest  extends ParentConfig{
         this.status = status;
     }
 
-    public int getUSerId() {
+    public User getUSerId() {
         return USerId;
     }
 
-    public void setUSerId(int USerId) {
+    public void setUSerId(User USerId) {
         this.USerId = USerId;
     }
-
 
     public void setId(Integer id) {
         this.id = id;

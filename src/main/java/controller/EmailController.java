@@ -162,6 +162,7 @@ public class EmailController {
         modelAndView.addObject("emails", emails);
         modelAndView.addObject("senders", senders);
         modelAndView.addObject("userName", userName);
+        modelAndView.addObject("password", password);
         return modelAndView;
     }
 }

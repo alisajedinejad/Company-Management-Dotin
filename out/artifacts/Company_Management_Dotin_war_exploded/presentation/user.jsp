@@ -263,7 +263,7 @@
                     <% for (int i = 0; i < requests.size(); i++) {
                         String name = "";
                         for (int j = 0; j < users.size(); j++) {
-                            if (requests.get(i).getUSerId() == users.get(j).getId()) {
+                            if (requests.get(i).getUSerId().getId() == users.get(j).getId()) {
 
                                 name = users.get(j).getName();
                                 break;

@@ -24,6 +24,7 @@ public class ParentConfig implements Serializable {
     private String modificationdate;
     private String version;
 
+
     public int getId() {
         return id;
     }
@@ -40,8 +41,6 @@ public class ParentConfig implements Serializable {
         this.active = active;
     }
 
-
-
     public void makeCreatedate() {
         Date thisTime = CalendarService.convertToJalali(new java.util.Date());
 
@@ -51,9 +50,6 @@ public class ParentConfig implements Serializable {
 
         this.createdate =dateFormat.format(thisTime) ;
     }
-
-
-
 
     public void makeModificationdate() {
         Date thisTime = CalendarService.convertToJalali(new java.util.Date());
@@ -68,5 +64,22 @@ public class ParentConfig implements Serializable {
 
     public void setVersion(String version) {
         this.version = version;
+    }
+
+
+    public String getCreatedate() {
+        return createdate;
+    }
+
+    public void setCreatedate(String createdate) {
+        this.createdate = createdate;
+    }
+
+    public String getModificationdate() {
+        return modificationdate;
+    }
+
+    public void setModificationdate(String modificationdate) {
+        this.modificationdate = modificationdate;
     }
 }

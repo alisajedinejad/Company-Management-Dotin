@@ -36,14 +36,11 @@ public class CheckOffDaysController {
         endTime = endTime.replace("/", "-");
 
 
-//        System.out.println("heloo"+startTime);
-//        System.out.println("heloo"+endTime);
 
         Date dateStart = java.sql.Date.valueOf(startTime);
         Date dateEnd = java.sql.Date.valueOf(endTime);
 
 
-        System.out.println("dddddd" + dateStart);
 
         java.util.Date dateStartPersian= CalendarService.convertToJalali(dateStart);
         java.util.Date dateEndPersian= CalendarService.convertToJalali(dateEnd);
@@ -99,11 +96,14 @@ public class CheckOffDaysController {
         DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
         dayOffRequest.setEnd(dateFormat.format(dateEndPersian));
         dayOffRequest.setStart(dateFormat.format(dateStartPersian));
-        dayOffRequest.setUSerId(Integer.parseInt(userId));
+        dayOffRequest.setUSerId(us.GetById(Integer.parseInt(userId)));
         dayOffRequest.setStatus(categoryEntity);
         DayOffRequestService dayOffRequestService = context.getBean(DayOffRequestService.class);
+
         try {
             List<DayOffRequest> dayOffRequests = dayOffRequestService.GetAllDayOffRequestById(Integer.parseInt(userId));
+
+
             try {
                 dayOffRequestService.AddIfNotOverLap(dayOffRequests, dayOffRequest);
             } catch (Exception e) {

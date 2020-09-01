@@ -65,8 +65,7 @@ public class DayOffRequestServiceImpl implements DayOffRequestService {
         List<DayOffRequest> dayOffRequests = DayOffRequestdao.SelectAll();
         List<DayOffRequest> dayOffRequestsProfed = new ArrayList<>();
         for (DayOffRequest dayOffRequest : dayOffRequests) {
-            int userId = dayOffRequest.getUSerId();
-            User user = DayOffRequestdao.SelectByIdUser(userId);
+            User user =dayOffRequest.getUSerId();
 
 
             if(user.getManager()!=null) {
@@ -108,6 +107,7 @@ public class DayOffRequestServiceImpl implements DayOffRequestService {
     @Override
     public void AddIfNotOverLap(List<DayOffRequest> dayOffRequests, DayOffRequest dayOffRequest) throws Exception {
         if (dayOffRequests.size() > 0) {
+
             String startTime1 = dayOffRequest.getStart().toString();
             String endTime1 = dayOffRequest.getEnd().toString();
             String startTime2 = dayOffRequests.get(0).getStart().toString();
@@ -119,6 +119,9 @@ public class DayOffRequestServiceImpl implements DayOffRequestService {
             CheckForbiddenVacationDate checkForbiddenVacationDate =
                     new CheckForbiddenVacationDate(startTime1, endTime1, startTime2, endTime2);
         }
+        System.out.println("here addd " + dayOffRequest);
         Add(dayOffRequest);
+        System.out.println("after addd " + dayOffRequest);
+
     }
 }

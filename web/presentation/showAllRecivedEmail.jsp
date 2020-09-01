@@ -19,7 +19,7 @@
         <img id="profilePic2" src="../assets/images/more.png">
 
     </div>
-    <form action="/ctl/checkPassword">
+    <form action="/ctl/checkPassword" >
         <input name="userName" value="<% out.print(userName); %>" hidden>
         <input name="password" value="<% out.print(password); %>" hidden>
 
