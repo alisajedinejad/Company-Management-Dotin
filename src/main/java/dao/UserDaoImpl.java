@@ -25,8 +25,9 @@ public class UserDaoImpl implements UserDao {
     }
 
     public void Delete(User m) {
-        m = em.merge(m);
-        em.remove(m);
+
+        m.setActive(false);
+        em.merge(m);
     }
 
     public User SelectById(int id) {
@@ -41,8 +42,9 @@ public class UserDaoImpl implements UserDao {
 
     @SuppressWarnings("unchecked")
     public List<User> SelectAll() {
-        System.out.println("heloooo");
         Query query = em.createQuery("from User", User.class);
         return (List<User>) query.getResultList();
     }
+
+
 }

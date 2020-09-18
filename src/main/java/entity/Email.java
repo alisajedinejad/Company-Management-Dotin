@@ -22,10 +22,9 @@ public class Email extends ParentConfig {
     private List<User> recivers;
 
     @OneToMany(fetch = FetchType.EAGER,mappedBy = "email")
-
     private List<File> attachments;
 
-    @OneToOne
+    @ManyToOne(fetch = FetchType.EAGER)
     private CategoryEntity importance;
 
     @ManyToOne

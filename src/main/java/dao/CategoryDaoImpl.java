@@ -24,8 +24,9 @@ public class CategoryDaoImpl implements CategoryDao {
     }
 
     public void Delete(Category m) {
-        m = em.merge(m);
-        em.remove(m);
+
+        m.setActive(false);
+        em.merge(m);
 
     }
 

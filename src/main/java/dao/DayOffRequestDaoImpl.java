@@ -25,9 +25,8 @@ public class DayOffRequestDaoImpl implements DayOffRequestDao {
     }
 
     public void Delete(DayOffRequest m) {
-        m = em.merge(m);
-        em.remove(m);
-
+        m.setActive(false);
+        em.merge(m);
     }
 
     public DayOffRequest SelectById(int id) {

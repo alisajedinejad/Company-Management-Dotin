@@ -22,8 +22,22 @@
 
     </form>
 
+    <form id="test" action="/ctl/test" method="post"  enctype="multipart/form-data">
 
+        <input name="id" value="alisajedi" type="text" hidden>
+        <input name="file" value="alisajedi" type="file">
+
+        <button class="l=" id="" type="submit">test test</button>
+
+
+
+
+    </form>
 </div>
+
+
+
+
 
 
 <div></div>

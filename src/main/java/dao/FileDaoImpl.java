@@ -1,6 +1,7 @@
 package dao;
 
 import entity.File;
+import entity.User;
 import org.springframework.stereotype.Repository;
 
 import javax.persistence.EntityManager;
@@ -24,13 +25,18 @@ public class FileDaoImpl implements FileDao {
     }
 
     public void Delete(File m) {
-        m = em.merge(m);
-        em.remove(m);
-
+        m.setActive(false);
+        em.merge(m);
     }
 
     public File SelectById(int id) {
         return em.find(File.class, id);
+    }
+
+    @Override
+    public List<File> GetByEmailId(int Id) {
+        Query query = em.createQuery("FROM File where email_c_emailId=" + Id);
+        return (List<File>) query.getResultList();
     }
 
     @SuppressWarnings("unchecked")

@@ -1,7 +1,6 @@
 package dao;
 
 import entity.CategoryEntity;
-import entity.DayOffRequest;
 import org.springframework.stereotype.Repository;
 
 import javax.persistence.EntityManager;
@@ -25,9 +24,8 @@ public class CategoryEntityDaoImpl implements CategoryEntityDao {
     }
 
     public void Delete(CategoryEntity m) {
-        m = em.merge(m);
-        em.remove(m);
-
+        m.setActive(false);
+        em.merge(m);
     }
 
     public CategoryEntity SelectById(int id) {
@@ -45,6 +43,4 @@ public class CategoryEntityDaoImpl implements CategoryEntityDao {
         Query query = em.createQuery("FROM CategoryEntity");
         return (List<CategoryEntity>) query.getResultList();
     }
-
-
 }

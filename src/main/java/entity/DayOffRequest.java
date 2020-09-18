@@ -16,7 +16,7 @@ import java.util.Date;
 })
 public class DayOffRequest extends ParentConfig {
 
-    @ManyToOne()
+    @ManyToOne(fetch = FetchType.EAGER)
     private CategoryEntity status;
 
     @ManyToOne
@@ -27,6 +27,29 @@ public class DayOffRequest extends ParentConfig {
 
     @Column(name = "c_end")
     private String end;
+
+
+    @Column(name = "c_start_clock")
+    private String startClock;
+
+    @Column(name = "c_end_clock")
+    private String endClock;
+
+    public String getStartClock() {
+        return startClock;
+    }
+
+    public void setStartClock(String startClock) {
+        this.startClock = startClock;
+    }
+
+    public String getEndClock() {
+        return endClock;
+    }
+
+    public void setEndClock(String endClock) {
+        this.endClock = endClock;
+    }
 
     public DayOffRequest() {
         super.makeCreatedate();

@@ -1,6 +1,7 @@
 package dao;
 
 import entity.Email;
+import entity.User;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
@@ -18,4 +19,7 @@ public interface EmailDao {
     public Email SelectById(int Id);
 
     public List<Email> SelectBySenderId(int Id);
+
+    public List<Object> GetAllByRecivers(int Id);
+
 }

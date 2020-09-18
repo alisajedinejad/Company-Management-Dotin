@@ -15,4 +15,6 @@ public interface FileService {
     public File Edit(File t);
 
     public List<File> GetAll();
+
+    public File GetByEmailId(int id);
 }

@@ -102,23 +102,23 @@
 
         <form method="post" action="/ctl/insertEmployee">
 
-            <div class="hover"><img src="../assets/images/userName.png"><input type="text" name="name"
+            <div class="hover"><img src="../assets/images/userName.png"><input type="text" name="name" id="name"
                                                                                placeholder="نام همکار را وارد کنید">
             </div>
             <div class="hover"><img src="../assets/images/userName.png"><input type="text" name="firstName"
                                                                                placeholder="نام مستعار ">
             </div>
-            <div class="hover"><img src="../assets/images/mail.png"><input type="text" name="email"
+            <div class="hover"><img src="../assets/images/mail.png"><input type="text" name="email" id="email"
                                                                            placeholder="ایمیل را وارد کنید"></div>
-            <div class="hover"><img src="../assets/images/passport.png"><input type="text" name="password"
+            <div class="hover"><img src="../assets/images/passport.png"><input type="text" name="password" id="pass"
                                                                                placeholder="پسوورد ورود همکار را وارد کنید">
             </div>
-            <div class="hover">
+            <div class="">
                 <img src="../assets/images/role.png">
 
-                <select onclick="mySelect()" class="hover" name="role">
+                <select id="role" onclick="mySelect0()" class="" name="role">
 
-                    <option class="disable">نقش کاربر را مشخص کنید</option>
+                    <option class="disable0">نقش کاربر را مشخص کنید</option>
 
                     <% for (int i = 0; i < CategoryEntities.size(); i++) { %>
                     <option value="<% out.print(CategoryEntities.get(i).getId()); %>">
@@ -129,13 +129,11 @@
                     <% } %>
                 </select>
             </div>
-            <div class="hover">
+            <div class="">
                 <img src="../assets/images/managar.png">
 
-                <select onclick="mySelect()" class="hover" name="manager">
-
-                    <option class="disable">لطفا مدیر مستقیم این همکار را مشخص کنید</option>
-
+                <select id="manager" onclick="mySelect1()" class="" name="manager">
+                    <option value="empty" class="disable1">لطفا مدیر مستقیم این همکار را مشخص کنید</option>
                     <% for (int i = 0; i < users.size(); i++) { %>
                     <option value="<% out.print(users.get(i).getId()); %>">
                         مدیر مستقیم :
@@ -151,9 +149,14 @@
 
 
 
-            <div class="hover">
+            <div class="hover" id="submitCreateUser">
                 <button class="hover">ثبت</button>
             </div>
+
+            <div class="hover" id="checkCreateUser">
+                <div onclick="checkCreateUser()" class="hover">بررسی</div>
+            </div>
+
             <input name="userName" value="<% out.print(user.getEmail()); %>" hidden>
             <input name="password2" value="<% out.print(user.getPassword()); %>" hidden>
 
@@ -218,7 +221,10 @@
                         <input name="endVacationTime" type="text" id="inputDate4" class="form-control" value="" hidden>
                         <img src="../assets/images/calendar.png"
                              style="width: 26px;height: 26px;top: 5px;left:5px;position: absolute">
+
+
                     </div>
+
                     <label id="showDate_class4"
 
                            style="display:none;width:300px;margin-left:0px;color: white;position: absolute;top: 7px;text-align: center;font-size: 17px"> </label>
@@ -230,6 +236,16 @@
                     </p>
 
                 </div>
+                <p style="width:300px;margin-left:0px;color: white;position: absolute;top: 7px;text-align: center;font-size: 17px;left: -430px;top: 70px" >زمان شروع مرخصی به ساعت</p>
+                <p style="width:300px;margin-left:0px;color: white;position: absolute;top: 7px;text-align: center;font-size: 17px;left: 0px;top: 70px" >زمان پایان مرخصی به ساعت </p>
+
+                <input name="startClock" style="left: -460px;top: 100px" type="time" placeholder="زمان شروع مرخصی به ساعت">
+                <input name="endClock"  style="right: 40px;top: 100px"  type="time" placeholder="زمان پایان مرخصی به ساعت ">
+
+
+
+
+
             </div>
             <input name="userId" value="<% out.print(user.getId()); %>" hidden>
             <button id="sendVacation" type="submit">ارسال درخواست مرخصی</button>
@@ -313,7 +329,7 @@
     <div id="mail">
 
 
-        <form action="/ctl/emailData" method="post">
+        <form action="/ctl/emailData" method="post"  enctype="multipart/form-data">
 
 
             <p id="senderTitle">گیرندگان : </p>
@@ -325,7 +341,7 @@
                     <% for (User user1 : users) { %>
                     <div class="recivers">
                         <input type="checkbox" name="names" value="<% out.print(user1.getId()); %>"
-                               onclick="return ValidatePetSelection();"> <% out.print(user1.getName()); %>
+                               onclick="ValidatePetSelection();"> <% out.print(user1.getName()); %>
                     </div>
                     <br>
                     <br>

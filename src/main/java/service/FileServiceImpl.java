@@ -35,4 +35,10 @@ public class FileServiceImpl implements FileService {
     public List<File> GetAll() {
         return Filedao.SelectAll();
     }
+
+    @Override
+    public File GetByEmailId(int id) {
+        return Filedao.GetByEmailId(id).get(0);
+    }
 }
+

@@ -6,6 +6,8 @@ import org.springframework.stereotype.Repository;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
+import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 
 @Repository
@@ -25,9 +27,8 @@ public class EmailDaoImpl implements EmailDao {
     }
 
     public void Delete(Email m) {
-        m = em.merge(m);
-        em.remove(m);
-
+        m.setActive(false);
+        em.merge(m);
     }
 
     public Email SelectById(int id) {
@@ -38,6 +39,23 @@ public class EmailDaoImpl implements EmailDao {
     public List<Email> SelectBySenderId(int Id) {
         Query query = em.createQuery("from Email where sender='" + Id + "'", Email.class);
         return (List<Email>) query.getResultList();
+    }
+
+    @Override
+    public List<Object> GetAllByRecivers(int Id) {
+        Query query = em.createNativeQuery("select * from t_email_t_user WHERE recivers_c_user=" + Id);
+        List<Object> result = (List<Object>) query.getResultList();
+        List<Object> returns = new ArrayList<>();
+
+        Iterator itr = result.iterator();
+        while (itr.hasNext()) {
+            Object[] obj = (Object[]) itr.next();
+            Integer emailId = Integer.parseInt(String.valueOf(obj[0]));
+            Query query2 = em.createNativeQuery("select * from t_email WHERE c_emailId=" + emailId);
+            returns.add(query2.getSingleResult());
+
+        }
+        return returns;
     }
 
     @SuppressWarnings("unchecked")

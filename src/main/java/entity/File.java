@@ -21,9 +21,21 @@ public class File extends ParentConfig {
     @Column(name = "c_location")
     private String location;
 
-    @Column(name = "c_size")
-    private String size;
+    @Column(name = "c_format")
+    private String format;
 
+    @Lob
+    @Column(name = "c_bytes")
+    private byte[] bytes;
+
+
+    public byte[] getBlol() {
+        return bytes;
+    }
+
+    public void setBlol(byte[] blol) {
+        this.bytes = blol;
+    }
 
     public File() {
         super.makeCreatedate();
@@ -47,11 +59,11 @@ public class File extends ParentConfig {
         this.location = location;
     }
 
-    public String getSize() {
-        return size;
+    public String getFormat() {
+        return format;
     }
 
-    public void setSize(String size) {
-        this.size = size;
+    public void setFormat(String format) {
+        this.format = format;
     }
 }

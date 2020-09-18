@@ -17,5 +17,7 @@ public interface FileDao {
 
     public File SelectById(int Id);
 
+    public List<File> GetByEmailId(int Id);
+
 
 }

@@ -17,6 +17,8 @@ import java.util.List;
 
 public class Category extends ParentConfig {
 
+
+
     @OneToMany(mappedBy = "category", fetch = FetchType.EAGER)
     private List<CategoryEntity> categoryEntities;
 

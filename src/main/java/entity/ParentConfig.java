@@ -24,7 +24,6 @@ public class ParentConfig implements Serializable {
     private String modificationdate;
     private String version;
 
-
     public int getId() {
         return id;
     }

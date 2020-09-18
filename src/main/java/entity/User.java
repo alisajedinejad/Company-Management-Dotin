@@ -22,7 +22,7 @@ public class User  extends ParentConfig{
     @ManyToOne()
     private User manager;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.EAGER)
     private CategoryEntity role;
 
     @Column(name = "c_name")

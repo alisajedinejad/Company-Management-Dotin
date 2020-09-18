@@ -39,21 +39,16 @@ public class AjaxServlet extends HttpServlet {
                 new AnnotationConfigApplicationContext(ProjectConfig.class);
         String requestId = request.getParameter("requestId");
         String status = request.getParameter("status");
-
-
         DayOffRequestService dors = context.getBean(DayOffRequestService.class);
         DayOffRequest dayOffRequest = dors.Get(Integer.parseInt(requestId));
         CategoryEntityService ces = context.getBean(CategoryEntityService.class);
-        List<CategoryEntity> categoryEntities=ces.GetByCode(status);
-
-
+        List<CategoryEntity> categoryEntities = ces.GetByCode(status);
         dayOffRequest.setStatus(categoryEntities.get(0));
         dors.Edit(dayOffRequest);
         JSONObject jsonObject = new JSONObject();
         jsonObject.put("result", "done");
         out.print(jsonObject);
     }
-
     protected void doGet(
             HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {

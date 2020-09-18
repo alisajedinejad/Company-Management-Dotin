@@ -208,9 +208,12 @@ function openMenuItemes(status) {
     }
 }
 
-function mySelect() {
+function mySelect0() {
 
-    $(".disable").prop('disabled', true);
+    $(".disable0").prop('disabled', true);
+}function mySelect1() {
+
+    $(".disable1").prop('disabled', true);
 }
 
 function activeAccept(status, e, number, id2) {
@@ -267,25 +270,58 @@ function sendFile(id) {
 
     console.log(fd);
 
-    $.ajax({
-        url: '/UploadServlet',
-        type: 'post',
-        data: fd,
-        id: id,
-        contentType: false,
-        processData: false,
+    //$.ajax({
+    //    url: '/UploadServlet',
+    //    type: 'post',
+    //    data: fd,
+    //    id: id,
+    //    contentType: false,
+    //    processData: false,
+    //
+    //    success: function (response) {
+    //
+    //        response = JSON.parse(response);
+    //
+    //        if (response['result'] == "done") {
+    //            alert("ثبت انجام شد", "success");
+    //
+    //        }
+    //        else {
+    //            alert('file not uploaded', "fail");
+    //        }
+    //    }
+    //});
+}
 
-        success: function (response) {
+function checkCreateUser() {
 
-            response = JSON.parse(response);
+    if ($("#name").val() == "") {
+        alert("نام همکار وارد نشده", "fail");
 
-            if (response['result'] == "done") {
-                alert("ثبت انجام شد", "success");
+    }
+    else if ($("#email").val() == "") {
+        alert("ایمیل وارد نشده", "fail");
 
-            }
-            else {
-                alert('file not uploaded', "fail");
-            }
-        }
-    });
+    }
+    else if ($("#pass").val() == "") {
+        alert("رمز عبور وارد نشده", "fail");
+
+    }
+    else if ($("#role").val() == "نقش کاربر را مشخص کنید" || $("#role").val() =="" ){
+        alert("نقش کاربر را مشخص کنید", "fail");
+
+    }
+
+    else if($("#manager").val() == "empty" || $("#manager").val() == ""){
+
+        alert("لطفا مدیر مستقیم این همکار را مشخص کنید","fail");
+    }
+
+    else{
+        alert("در صورت اطمینان از اطلاعات داده شده کلید ثبت را بزنید","success");
+        $("#checkCreateUser").hide();
+        $("#submitCreateUser").show();
+
+    }
+
 }
